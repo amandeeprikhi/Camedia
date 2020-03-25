@@ -1,0 +1,23 @@
+﻿@model Camedia.ViewModels.RandomMovieViewModel
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+@if (Model.Movies.Count == 0)
+{
+    <text>We don't currently have any movies.</text>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@movie.Name</td>
+            </tr>
+        }
+    </table>
+}
+
