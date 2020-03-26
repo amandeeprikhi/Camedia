@@ -1,8 +1,18 @@
-﻿@model Camedia.ViewModels.RandomMovieViewModel
+﻿@model Camedia.Models.Customer
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Customer Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Customer</h2>
+<h2>@Model.Name</h2>
+
+<ul>
+    <li>
+        Membership Type : @Model.MembershipType.Name
+    </li>
+    @if (Model.DateOfBirth != null)
+    {
+        <li>Date of Birth : @Model.DateOfBirth.Value.ToShortDateString()</li>
+    }
+</ul>
 

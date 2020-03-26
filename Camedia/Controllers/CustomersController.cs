@@ -1,6 +1,7 @@
 ﻿using Camedia.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,35 +11,47 @@ namespace Camedia.Controllers
 {
 	public class CustomersController : Controller
 	{
-		// GET: Customers
-		public ActionResult Index()
+		private ApplicationDbContext _context;
+
+		public CustomersController()
 		{
-			var customers = new Customer();
+			_context = new ApplicationDbContext();
+		}
 
-			var viewModel = new RandomMovieViewModel
-			{
-				Customers = customers.Customers()
-			};
+		protected override void Dispose(bool disposing)
+		{
+			_context.Dispose();
+		}
 
-			return View(viewModel);
+		// GET: Customers
+		public ViewResult Index()
+		{
+			var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+
+			//var viewModel = new RandomMovieViewModel
+			//{
+			//	Customers = customers
+			//};
+
+			return View(customers);
 		}
 		[Route("customers/details/{id}")]
 		public ActionResult Details(int id)
 		{
-			var customers = new Customer();
+			var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
 
-			var viewModel = new RandomMovieViewModel
-			{
-				Customer = customers.Customers(id)
-			};
+			//var viewModel = new RandomMovieViewModel
+			//{
+			//	Customer = customers.Customers(id)
+			//};
 
-			if (customers.Customers(id) == "NA")
+			if (customer == null)
 			{
 				return HttpNotFound();
 			}
 			else
 			{
-				return View(viewModel);
+				return View(customer);
 			}
 		}
 	}
