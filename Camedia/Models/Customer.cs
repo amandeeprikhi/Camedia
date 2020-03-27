@@ -11,7 +11,7 @@ namespace Camedia.Models
 	{
 		public int Id { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Please enter the customer's name.")]
 		[StringLength(255)]
 		public string Name { get; set; }
 
@@ -22,6 +22,8 @@ namespace Camedia.Models
 		[Display(Name="Membership Type")]
 		public byte MembershipTypeId { get; set; }
 
+		[Display(Name = "Date of Birth")]
+		[Min18YrsIfAMember]
 		public DateTime? DateOfBirth { get; set; }
 
 		public List<Customer> Customers()
