@@ -68,14 +68,15 @@ namespace Camedia.Controllers
 		// GET: Customers
 		public ViewResult Index()
 		{
-			var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+			//var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 
 			//var viewModel = new RandomMovieViewModel
 			//{
 			//	Customers = customers
 			//};
 
-			return View(customers);
+			//return View(customers);
+			return View();
 		}
 		[Route("customers/details/{id}")]
 		public ActionResult Details(int id)

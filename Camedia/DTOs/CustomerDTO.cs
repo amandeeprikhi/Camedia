@@ -19,6 +19,8 @@ namespace Camedia.DTOs
 
 		public byte MembershipTypeId { get; set; }
 
+		public MembershipTypeDTO MembershipType { get; set; }
+
 		//[Min18YrsIfAMember]
 		public DateTime? DateOfBirth { get; set; }
 	}

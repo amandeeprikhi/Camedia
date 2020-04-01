@@ -86,14 +86,7 @@ namespace Camedia.Controllers
 
 		public ViewResult Index()
 		{
-			var movies = _context.Movies.Include(m => m.Genre).ToList();
-
-			//var viewModel = new RandomMovieViewModel
-			//{
-			//	Movies = movies.Movies()
-			//};
-
-			return View(movies);
+			return View();
 		}
 
 		[Route("movies/details/{id}")]

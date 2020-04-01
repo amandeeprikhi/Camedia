@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Camedia.DTOs;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Camedia.DTOS
@@ -13,6 +14,8 @@ namespace Camedia.DTOS
 
 		[Required]
 		public byte GenreId { get; set; }
+
+		public GenreDTO Genre { get; set; }
 
 		public DateTime DateAdded { get; set; }
 

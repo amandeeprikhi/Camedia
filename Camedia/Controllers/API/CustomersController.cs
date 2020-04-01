@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Data.Entity;
 using System.Web.Http;
 using Camedia.DTOs;
 using Camedia.Models;
@@ -20,7 +21,10 @@ namespace Camedia.Controllers.API
 		}
 		// GET /api/customers
 		public IHttpActionResult GetCustomers() {
-			var customerDTOs = _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDTO>);
+			var customerDTOs = _context.Customers
+				.Include(c => c.MembershipType)
+				.ToList()
+				.Select(Mapper.Map<Customer, CustomerDTO>);
 
 			return Ok(customerDTOs);
 		}
